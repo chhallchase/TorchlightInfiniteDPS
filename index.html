@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torchlight Infinite DPS Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .result h2 {
+            margin-top: 0;
+        }
+        .dps-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <h1>Torchlight Infinite DPS Calculator</h1>
+    
+    <div class="calculator">
+        <div class="input-group">
+            <label for="baseDamage">Base Damage</label>
+            <input type="number" id="baseDamage" placeholder="Enter base damage" value="100">
+        </div>
+        
+        <div class="input-group">
+            <label for="attackSpeed">Attack Speed (attacks per second)</label>
+            <input type="number" id="attackSpeed" step="0.1" placeholder="Enter attack speed" value="1.5">
+        </div>
+        
+        <div class="input-group">
+            <label for="critChance">Critical Hit Chance (%)</label>
+            <input type="number" id="critChance" min="0" max="100" placeholder="Enter crit chance" value="15">
+        </div>
+        
+        <div class="input-group">
+            <label for="critMultiplier">Critical Damage Multiplier (%)</label>
+            <input type="number" id="critMultiplier" min="100" placeholder="Enter crit multiplier" value="150">
+        </div>
+        
+        <button onclick="calculateDPS()">Calculate DPS</button>
+        
+        <div class="result">
+            <h2>Calculated DPS</h2>
+            <div class="dps-value" id="dpsResult">0</div>
+        </div>
+    </div>
+
+    <script>
+        function calculateDPS() {
+            // Get input values
+            const baseDamage = parseFloat(document.getElementById('baseDamage').value) || 0;
+            const attackSpeed = parseFloat(document.getElementById('attackSpeed').value) || 0;
+            const critChance = parseFloat(document.getElementById('critChance').value) || 0;
+            const critMultiplier = parseFloat(document.getElementById('critMultiplier').value) || 100;
+            
+            // Calculate non-crit DPS
+            const nonCritDamage = baseDamage * (1 - (critChance / 100));
+            
+            // Calculate crit DPS
+            const critDamage = baseDamage * (critChance / 100) * (critMultiplier / 100);
+            
+            // Calculate total DPS
+            const totalDPS = (nonCritDamage + critDamage) * attackSpeed;
+            
+            // Display the result
+            document.getElementById('dpsResult').textContent = totalDPS.toFixed(2);
+        }
+        
+        // Calculate initial DPS on page load
+        window.onload = calculateDPS;
+    </script>
+</body>
+</html>
