@@ -4,124 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torchlight Infinite DPS Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #e74c3c;
-            text-align: center;
-        }
-        .calculator {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #c0392b;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            text-align: center;
-        }
-        .result h2 {
-            margin-top: 0;
-        }
-        .dps-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e74c3c;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Torchlight Infinite DPS Calculator</h1>
     
     <div class="calculator">
-        <div class="input-group">
-            <label for="baseDamage">Base Damage</label>
-            <input type="number" id="baseDamage" placeholder="Enter base damage" value="100">
+        <div class="section-title">Base Stats</div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="baseDamage">Base Damage</label>
+                <input type="number" id="baseDamage" placeholder="Base damage" value="100">
+            </div>
+            
+            <div class="input-group">
+                <label for="flatAddedDamage">Flat Added Damage</label>
+                <input type="number" id="flatAddedDamage" placeholder="Flat added damage" value="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="damageEffectiveness">Damage Effectiveness (%)</label>
+                <input type="number" id="damageEffectiveness" placeholder="Effectiveness %" value="100">
+            </div>
+            
+            <div class="input-group">
+                <label for="attackSpeed">Attack Speed (per second)</label>
+                <input type="number" id="attackSpeed" step="0.1" placeholder="Attack speed" value="1.5">
+            </div>
         </div>
         
-        <div class="input-group">
-            <label for="attackSpeed">Attack Speed (attacks per second)</label>
-            <input type="number" id="attackSpeed" step="0.1" placeholder="Enter attack speed" value="1.5">
+        <div class="section-title">Damage Multipliers</div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="mainStat">Main Stat</label>
+                <input type="number" id="mainStat" placeholder="Main stat" value="100">
+            </div>
+            
+            <div class="input-group">
+                <label for="damageIncrease">All % Damage Increase</label>
+                <input type="number" id="damageIncrease" placeholder="% damage increase" value="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="lifeMultiplier">Additional Damage to Life (%)</label>
+                <input type="number" id="lifeMultiplier" placeholder="% to life" value="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="doubleDamageChance">Double Damage Chance (%)</label>
+                <input type="number" id="doubleDamageChance" min="0" max="100" placeholder="Double damage %" value="0">
+            </div>
         </div>
         
-        <div class="input-group">
-            <label for="critChance">Critical Hit Chance (%)</label>
-            <input type="number" id="critChance" min="0" max="100" placeholder="Enter crit chance" value="15">
+        <div class="section-title">Penetration</div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="spellPenetration">Spell Penetration (%)</label>
+                <input type="number" id="spellPenetration" placeholder="Spell pen %" value="0">
+            </div>
+            
+            <div class="input-group">
+                <label for="armorPenetration">Armor Penetration (%)</label>
+                <input type="number" id="armorPenetration" placeholder="Armor pen %" value="0">
+            </div>
         </div>
         
-        <div class="input-group">
-            <label for="critMultiplier">Critical Damage Multiplier (%)</label>
-            <input type="number" id="critMultiplier" min="100" placeholder="Enter crit multiplier" value="150">
+        <div class="section-title">Critical Hit</div>
+        <div class="input-section">
+            <div class="input-group">
+                <label for="critChance">Critical Hit Chance (%)</label>
+                <input type="number" id="critChance" min="0" max="100" placeholder="Crit chance" value="15">
+            </div>
+            
+            <div class="input-group">
+                <label for="critMultiplier">Critical Damage Multiplier (%)</label>
+                <input type="number" id="critMultiplier" min="100" placeholder="Crit multiplier" value="150">
+            </div>
         </div>
         
-        <button onclick="calculateDPS()">Calculate DPS</button>
+        <div class="button-group">
+            <button onclick="calculateDPS()">Calculate DPS</button>
+            <button onclick="setReference()" id="setReferenceBtn">Set as Reference</button>
+            <button onclick="cancelReference()" id="cancelReferenceBtn" style="display: none;">Cancel</button>
+        </div>
         
         <div class="result">
-            <h2>Calculated DPS</h2>
-            <div class="dps-value" id="dpsResult">0</div>
+            <h2>DPS:</h2>
+            <span class="dps-value" id="dpsResult">0</span>
+            
+            <div id="dpsCompare" class="dps-compare" style="display: none;">
+                <div class="compare-item">
+                    <span class="compare-label">vs Reference:</span>
+                    <span id="dpsChange" class="dps-change">+0 (0%)</span>
+                </div>
+                <div class="compare-item">
+                    <span class="compare-label">Reference DPS:</span>
+                    <span id="dpsReference" class="dps-reference">0</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
-        function calculateDPS() {
-            // Get input values
-            const baseDamage = parseFloat(document.getElementById('baseDamage').value) || 0;
-            const attackSpeed = parseFloat(document.getElementById('attackSpeed').value) || 0;
-            const critChance = parseFloat(document.getElementById('critChance').value) || 0;
-            const critMultiplier = parseFloat(document.getElementById('critMultiplier').value) || 100;
-            
-            // Calculate non-crit DPS
-            const nonCritDamage = baseDamage * (1 - (critChance / 100));
-            
-            // Calculate crit DPS
-            const critDamage = baseDamage * (critChance / 100) * (critMultiplier / 100);
-            
-            // Calculate total DPS
-            const totalDPS = (nonCritDamage + critDamage) * attackSpeed;
-            
-            // Display the result
-            document.getElementById('dpsResult').textContent = totalDPS.toFixed(2);
-        }
-        
-        // Calculate initial DPS on page load
-        window.onload = calculateDPS;
-    </script>
+    <script src="calculator.js"></script>
 </body>
 </html>

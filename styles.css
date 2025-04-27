@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+h1 {
+    color: #ff7e5f;
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.calculator {
+    background-color: #2d2d2d;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.input-group {
+    margin-bottom: 8px;
+    width: 220px;
+}
+
+label {
+    display: block;
+    margin-bottom: 2px;
+    font-weight: bold;
+    font-size: 12px;
+    color: #c0c0c0;
+}
+
+input {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #444;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 13px;
+    background-color: #383838;
+    color: #e0e0e0;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff7e5f;
+}
+
+button {
+    background-color: #ff7e5f;
+    color: #1e1e1e;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-right: 8px;
+    width: auto;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #ff9980;
+}
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#cancelReferenceBtn {
+    background-color: #4a4a4a;
+    color: #e0e0e0;
+}
+
+#cancelReferenceBtn:hover {
+    background-color: #5a5a5a;
+}
+
+.result {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #333333;
+    border-radius: 3px;
+}
+
+.result h2 {
+    margin-top: 0;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 10px;
+    color: #c0c0c0;
+}
+
+.dps-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff7e5f;
+    display: inline-block;
+}
+
+.dps-compare {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #444;
+}
+
+.compare-item {
+    margin: 5px 0;
+}
+
+.compare-label {
+    color: #c0c0c0;
+    margin-right: 10px;
+}
+
+.dps-change {
+    font-weight: bold;
+}
+
+.dps-reference {
+    color: #8e8e8e;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 3px;
+    color: #ff7e5f;
+}
